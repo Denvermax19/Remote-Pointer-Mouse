@@ -8,10 +8,15 @@ import string
 import websockets
 
 # ==================== CONFIGURATION ====================
-# REPLACE WITH YOUR RENDER URL (Must start with wss://)
-SERVER_URL = input("Enter your signaling server URL: ").strip()
+SERVER_URL = input("Paste your server URL: ").strip()
+# Automatically replaces https:// with wss:// if you forgot
+if SERVER_URL.startswith("https://"):
+    SERVER_URL = SERVER_URL.replace("https://", "wss://")
+elif not SERVER_URL.startswith("wss://"):
+    SERVER_URL = "wss://" + SERVER_URL
+else:
+    SERVER_URL = SERVER_URL
 
-# "wss://YOUR_RENDER_URL.onrender.com"
 # ========================================================
 
 user32 = ctypes.windll.user32
